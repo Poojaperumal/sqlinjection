@@ -45,21 +45,18 @@ Click on the menu Login/Register and register for an account
 Click on “Create Account” to display the following page:
 ## OUTPUT:
 
+<img width="1920" height="945" alt="eh" src="https://github.com/user-attachments/assets/33c87f9a-defc-4526-ab17-d82d66325490" />
 
 
 
 The login structure we will use in our examples is straightforward. It contains two input fields (username and password), which are both vulnerable. The back-end content creates a query to approve the username and secret key given by the client. Here is an outline of the page rationale:
 
 ($query = “SELECT * FROM users WHERE username=’$_POST[username]’ AND password=’$_POST[password]’“;). For the username put “ganesh” or “anything” and for the password put (anything’ or ‘1’=’1) or (admin’ or ‘1’=’1) then try to log in, and you’ll be presented with an admin login page. Click “Login”. 
-## OUTPUT:
-![{BEC6843A-A0F1-4B48-A1FC-98E701497780}](https://github.com/user-attachments/assets/17f2ddcb-829b-4fb0-a8c0-a2532e8e2d2c)
 
 ## Bypassing login field
 
 The username field is vulnerable. Put (blaise’ #) or (blaise’--) in the username field and hit “Enter” to log in. We use “#” or “--” to comment everything in the query sentence that comes after the username filed telling the database to disregard the password field: (SELECT * FROM users WHERE username=’admin’ # AND password=’ ‘). By using line commenting, the aggressor eliminates a part of the login condition and gains access. This technique will make the “WHERE” clause true only for one user; in this case, it is “blaise.”
 Now after logging out you will see the login page. In the login page give blaise’ # . You can see the page now enters into the administrator page as before when giving the password.
-## OUTPUT:
-![{6AA84ECE-7C9E-437D-81A6-E705C16AA32C}](https://github.com/user-attachments/assets/c4f4e507-4837-4abc-b8a7-cea456892295)
 
 Click the login button and you will see it enter into the administrator page
 ## OUTPUT:
@@ -71,8 +68,12 @@ UNION-based SQL injection assaults enable the analyzer to extract data from the 
 After logging out, Now choose the menu as shown below:
 ## OUTPUT:
 ![image](https://github.com/user-attachments/assets/79455fec-9807-4697-b09d-c8456a6029d2)
+
+
 ![{BE940EBA-1AA7-4D6C-AAAD-3CF44F45D913}](https://github.com/user-attachments/assets/26ee1e6c-137c-4891-894c-cf855b31c909)
-![{FBC7825B-A443-4F3A-BE51-4D8F3534C821}](https://github.com/user-attachments/assets/14a7f703-9a5a-4214-a395-30a2eded90ac)
+
+
+
 ![{17620DEA-A248-47FD-AEBE-7DB5371619B6}](https://github.com/user-attachments/assets/673450b4-ec03-4ee0-9164-dc8e73cded34)
 
 From this point, all our attack vectors will be performed in the URL section of the page using the Union-Based technique.There are two different ways to discover how many columns are selected by the original query. The first is to infuse an “ORDER BY” statement indicating a column number. Given the column number specified is higher than the number of columns in the “SELECT” statement, an error will be returned.
@@ -121,6 +122,8 @@ union select 1,table_name,null,null,5 from information_schema.tables where table
 http://192.168.1.10/mutillidae/index.php?page=user-info.php&username=blaise%27union%20select%201,table_name,null,null,5%20from%20information_schema.tables%20where%20table_schema=%27owasp10%27%23&password=&user-info-php-submit-button=View+Account+Details
 ## OUTPUT:
 ![{033A74C8-9DD5-4471-97FA-77A47AC2EE56}](https://github.com/user-attachments/assets/85e95ff5-3ce8-41a0-9e16-e68bfaddb18a)
+
+
 ![{AD9A7552-110E-425A-9758-A996C658F3C8}](https://github.com/user-attachments/assets/6632160b-5cb8-4ad9-95bc-cabfd22c6438)
 
 
